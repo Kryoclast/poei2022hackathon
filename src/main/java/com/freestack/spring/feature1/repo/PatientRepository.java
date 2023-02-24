@@ -1,4 +1,7 @@
 package com.freestack.spring.feature1.repo;
 
-public class PatientRepository {
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface PatientRepository {
 }
