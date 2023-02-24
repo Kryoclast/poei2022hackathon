@@ -1,5 +1,7 @@
 package com.freestack.spring.feature1.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
@@ -11,10 +13,16 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-
+    @Column(name = "rdv")
     public LocalDateTime rdvDate;
-    public Long patient_id;
-    public Long medecin_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
+    @JoinColumn(name = "patient_id")
+    public Patient patient;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
+    @JoinColumn(name = "medecin_id")
+    public Medecin medecin;
 
     public Reservation() {
     }
@@ -27,14 +35,6 @@ public class Reservation {
         this.id = id;
     }
 
-
-    public Reservation(LocalDateTime rdvDate, Long patient_id, Long medecin_id) {
-        this.rdvDate = rdvDate;
-        this.patient_id = patient_id;
-        this.medecin_id = medecin_id;
-    }
-
-
     public LocalDateTime getRdvDate() {
         return rdvDate;
     }
@@ -43,20 +43,20 @@ public class Reservation {
         this.rdvDate = rdvDate;
     }
 
-    public Long getPatient_id() {
-        return patient_id;
+    public Patient getPatient() {
+        return patient;
     }
 
-    public void setPatient_id(Long patient_id) {
-        this.patient_id = patient_id;
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
-    public Long getMedecin_id() {
-        return medecin_id;
+    public Medecin getMedecin() {
+        return medecin;
     }
 
-    public void setMedecin_id(Long medecin_id) {
-        this.medecin_id = medecin_id;
+    public void setMedecin(Medecin medecin) {
+        this.medecin = medecin;
     }
 }
 

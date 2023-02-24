@@ -1,6 +1,10 @@
 package com.freestack.spring.feature1.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "medecin")
@@ -13,6 +17,9 @@ public class Medecin {
     public String firstname;
     @Column(name = "lastname")
     public String lastname;
+    @OneToMany(mappedBy = "medecin")
+    @JsonManagedReference
+    private List<Reservation> reservations = new ArrayList<>();
 
     public Medecin() {
     }
@@ -37,6 +44,22 @@ public class Medecin {
 
     public String getLastname() {
         return lastname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
     }
 }
 
