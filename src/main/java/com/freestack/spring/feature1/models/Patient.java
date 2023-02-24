@@ -1,10 +1,28 @@
 package com.freestack.spring.feature1.models;
 
-public class Patient {
+import javax.persistence.*;
 
-    public Integer id;
+@Entity
+@Table(name = "patient")
+public class Patient {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
+
     public String firstname;
     public String lastname;
+
+    public Patient() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
 
     public Patient(String firstname, String lastname) {
@@ -13,13 +31,7 @@ public class Patient {
     }
 
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getFirstname() {
         return firstname;

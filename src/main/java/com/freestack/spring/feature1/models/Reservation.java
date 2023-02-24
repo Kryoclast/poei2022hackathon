@@ -1,30 +1,39 @@
 package com.freestack.spring.feature1.models;
 
+import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
+@Entity
+@Table(name = "reservation")
 public class Reservation {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
 
-    public Integer id;
     public LocalDateTime rdvDate;
-    public Integer patient_id;
-    public Integer medecin_id;
+    public Long patient_id;
+    public Long medecin_id;
+
+    public Reservation() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
 
-    public Reservation(LocalDateTime rdvDate, Integer patient_id, Integer medecin_id) {
+    public Reservation(LocalDateTime rdvDate, Long patient_id, Long medecin_id) {
         this.rdvDate = rdvDate;
         this.patient_id = patient_id;
         this.medecin_id = medecin_id;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public LocalDateTime getRdvDate() {
         return rdvDate;
@@ -34,19 +43,19 @@ public class Reservation {
         this.rdvDate = rdvDate;
     }
 
-    public Integer getPatient_id() {
+    public Long getPatient_id() {
         return patient_id;
     }
 
-    public void setPatient_id(Integer patient_id) {
+    public void setPatient_id(Long patient_id) {
         this.patient_id = patient_id;
     }
 
-    public Integer getMedecin_id() {
+    public Long getMedecin_id() {
         return medecin_id;
     }
 
-    public void setMedecin_id(Integer medecin_id) {
+    public void setMedecin_id(Long medecin_id) {
         this.medecin_id = medecin_id;
     }
 }
